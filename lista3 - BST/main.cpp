@@ -8,20 +8,23 @@ using namespace std;
 
 
 
-class List{
+class List{//ach que a lista esta pronta
     int element;
     List* next;
+    int totalElementos;
 
 public:
 
     List(){
         this->element = 0;
         next = nullptr;
+        this->totalElementos = 0;
     }
 
     void inset(int id){
         if(this->next = nullptr){
             this->next->element = id;
+            this->totalElementos = this->totalElementos + 1;
         }else{
             this->next->inset(id);
         }
@@ -30,6 +33,7 @@ public:
     void remove(int id){
         if(this->next->element==id){
             this->next=this->next->next;
+            this->totalElementos = this->totalElementos - 1;
         }else{
             this->next->remove(id);
         }
@@ -53,32 +57,60 @@ public:
     Node* left;//aka subordinado
     Node* right;//aka subordinado
     List* funcionarios;
+    Node* pai;
 
-    Node(int element){
+    Node(Node* pai, int element){
         this->element = element;
         this -> left = nullptr;
         this -> right = nullptr;
         this->funcionarios = new List();
+        this-> pai = pai;
     }
 
-    void insertNode(int element){
+    Node(){
+        this->element = 0;
+        this -> left = nullptr;
+        this -> right = nullptr;
+        this->funcionarios = new List();
+        this-> pai = nullptr;
+    }
+
+    void insertNode(Node* pai, int element){
         if(element>this->element){
             if(this->right==nullptr){
-                this->right= new Node(element);
+                this->right= new Node(pai, element);
             }else{
-                this->right->insertNode(element);
+                this->right->insertNode(this->right, element);
             }
         }else{
             if(this->left==nullptr){
-                this->left= new Node(element);
+                this->left= new Node(pai, element);
             }else{
-                this->left->insertNode(element);
+                this->left->insertNode(this->left, element);
             }
         }
     }
 
-    void removeNode(int element){
+    void removeReal(int element){
+        if(this->left==nullptr && this->right == nullptr){//sem filho
+            this = null;
+        }else if(this->left != nullptr){//filho a esquerda
 
+        }else if(this -> right != nullptr){//filho a direita
+
+        }else{//2 filhos
+
+        }
+    }
+
+    void removeNode(int element){
+        if(element = this->right->element){
+            this->removeReal(element);
+        }else if(element > this->right->element){
+            this->right->removeNode(element);
+        }else{
+            this->left->removeNode(element);
+        }
     }
 
 };
@@ -95,14 +127,14 @@ public:
 
     void insert(int element){
        if(this->root==nullptr){
-           this->root = new Node(element);
+           this->root = new Node(nullptr, element);
        }else{
-           this->root->insertNode(element);
+           this->root->insertNode(this->root, element);
        }
     }
 
     void remove(int element){
-        
+        this->root->removeNode(element);
     }
 
 };
