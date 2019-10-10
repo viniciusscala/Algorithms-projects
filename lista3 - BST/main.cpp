@@ -6,20 +6,48 @@ using namespace std;
 
 //H é o max de nos de uma arvore
 
+
+
 class List{
     int element;
     List* next;
 
-    List(int element){
-        if(this->elemt){
-            this
+public:
+
+    List(){
+        this->element = 0;
+        next = nullptr;
+    }
+
+    void inset(int id){
+        if(this->next = nullptr){
+            this->next->element = id;
+        }else{
+            this->next->inset(id);
+        }
+    }
+
+    void remove(int id){
+        if(this->next->element==id){
+            this->next=this->next->next;
+        }else{
+            this->next->remove(id);
+        }
+    }
+
+    bool src(int id){
+        if(this->next->element == id){
+            return true;
+        }else if(this->next == nullptr){
+            return false;
+        }else{
+            return src(id);
         }
     }
 };
 
 
 class Node{//aka posto
-    //ps: acho que eu ainda voi precisar colocar uma lista de funcionarios aqui
 public:
     int element;//aka casta
     Node* left;//aka subordinado
@@ -30,6 +58,7 @@ public:
         this->element = element;
         this -> left = nullptr;
         this -> right = nullptr;
+        this->funcionarios = new List();
     }
 
     void insertNode(int element){
@@ -46,6 +75,10 @@ public:
                 this->left->insertNode(element);
             }
         }
+    }
+
+    void removeNode(int element){
+
     }
 
 };
@@ -68,6 +101,27 @@ public:
        }
     }
 
+    void remove(int element){
+        
+    }
+
+};
+
+class ArrayBases{
+    Bst* arrayBase;
+public:
+
+    ArrayBases(int numBases){
+        this->arrayBase = new Bst[numBases];
+    }
+
+    void insert(){
+
+    }
+
+    void remove(){
+
+    }
 };
 
 int main(int argc, char *argv[]) {
@@ -75,14 +129,14 @@ int main(int argc, char *argv[]) {
     cin.tie(nullptr);
 
     int numBases;
-    int limitePostos;
+    int hLimite;
     int totalInicialAgentes;
 
     cin >> numBases;
-    cin >> limitePostos;
+    cin >> hLimite;
     cin >> totalInicialAgentes;
 
-    Bst* arrayBase = new Bst[numBases];
+    ArrayBases* array = new ArrayBases(numBases);
 
     int casta;
     int id;
@@ -97,6 +151,8 @@ int main(int argc, char *argv[]) {
         cin >> casta;
         cin >> id;
         cin >> base;
+
+
 
         //inserir os funcionarios
     }
