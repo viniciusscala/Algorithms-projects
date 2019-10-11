@@ -1,3 +1,4 @@
+//#include <bits/stdc++.h>
 #include "/usr/local/include/bits/stdc++.h"
 #define endl '\n'
 
@@ -133,7 +134,7 @@ public:
     void removeNode(Node* root, int element){
         if((element > this->element)){
             this->right->removeNode(this->right, element);
-        }else if((element < this->right->element)){
+        }else if((element < this->element)){
             this->left->removeNode(this->right, element);
         }else{
             if(this->left==nullptr){//se só tiver o da direita (O elemento que eu quero deletar)
@@ -191,13 +192,13 @@ public:
     }
 
     Node* src(int casta){
-        if(casta == this->element){
-            return this;
-        }else if(this!=nullptr){
+        if(this!=nullptr){
             if(casta>this->element){
                 return this->right->src(casta);
-            }else{
+            }else if(casta<this->element){
                 return this->left->src(casta);
+            }else{
+                return this;
             }
         }else{
             return nullptr;
@@ -227,11 +228,13 @@ private:
         return this->root->src(this->root, id, casta, 0);
     }
 
+
+
+public:
+
     int altura(){
         return this->root->altura(nullptr);
     }
-
-public:
 
     Node *getRoot() const {
         return root;
@@ -250,22 +253,22 @@ public:
         }
     }
 
-    bool inf(int id, int casta, int max){
+    bool inf(int id, int casta, int maxh, Node* root){
         int teste = this->altura();
-        if(teste<max){
-            this->insert(casta, id, this->root, max);
-            return true;
+        if(teste<=maxh){// nem sempre inserir aumenta o tamanho da arvore/////////////////////////////////////////
+            return this->insert(casta, id, root, maxh);
         }else{
             return false;
         }
-
     }
 
     void ext(int id, int casta){
         Node* posto= this->root->src(casta);
-        posto->funcionarios->remove(id);
-        if(posto->funcionarios->getTotalElementos()==0){
-            this->remove(posto->element);
+        if(posto!=nullptr){
+            posto->funcionarios->remove(id);
+            if(posto->funcionarios->getTotalElementos()==0){
+                this->remove(posto->element);
+            }
         }
     }
 
@@ -274,6 +277,12 @@ public:
     }
 
 };
+
+void debugger(Bst arrayBase[5]){
+    for(int i = 0; i<5; i++){
+        cout << arrayBase[i].altura() << endl;
+    }
+}
 
 int main(int argc, char *argv[]) {
     ios::sync_with_stdio(false);
@@ -286,6 +295,8 @@ int main(int argc, char *argv[]) {
     cin >> numBases;
     cin >> hLimite;
     cin >> totalInicialAgentes;
+
+    hLimite = hLimite-1;
 
     Bst arrayBase[5];
 
@@ -309,6 +320,9 @@ int main(int argc, char *argv[]) {
 
         bool teste = false;
 
+        //debugger(arrayBase);
+        //cout << endl;
+
         for(int j = 0; j<numBases && !teste; j++){
             int baseAux = ((base+j) % numBases);
             teste = arrayBase[baseAux].adm(id, casta, hLimite, arrayBase[baseAux].getRoot());
@@ -327,10 +341,11 @@ int main(int argc, char *argv[]) {
 
             bool teste = false;
 
-            for(int i = 0; i<numBases && !teste; i++){
-                teste = arrayBase[((base+i) % numBases)].inf(id, casta, hLimite);
+            for(int j = 0; j<numBases && !teste; j++){
+                int baseAux = ((base+j) % numBases);
+                teste = arrayBase[baseAux].inf(id, casta, hLimite, arrayBase[baseAux].getRoot());
                 if(teste){
-                    cout << ((base+i) % numBases) << endl;
+                    cout << ((base+j) % numBases) << endl;
                 }
             }
             if(!teste){
