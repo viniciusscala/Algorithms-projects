@@ -1,9 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/lista3___BST.dir/main.cpp.obj"
+  "CMakeFiles/lista3___BST.dir/main.cpp.o"
   "lista3___BST.pdb"
-  "lista3___BST.exe"
-  "lista3___BST.exe.manifest"
-  "liblista3___BST.dll.a"
+  "lista3___BST"
 )
 
 # Per-language clean rules from dependency scanning.

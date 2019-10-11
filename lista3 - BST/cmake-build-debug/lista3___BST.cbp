@@ -8,88 +8,82 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
+				<Option working_dir="/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="lista3___BST">
-				<Option output="C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/lista3___BST.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../include/c++/7.2.0"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../include/c++/7.2.0/x86_64-w64-mingw32"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../include/c++/7.2.0/backward"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../include"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include-fixed"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../x86_64-w64-mingw32/include"/>
-					<Add directory="C://Program Files//Haskell Platform//8.6.5//mingw//bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include"/>
-					<Add directory="C://Program Files//Haskell Platform//8.6.5//mingw//bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include-fixed"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 lista3___BST"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="lista3___BST/fast">
-				<Option output="C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/lista3___BST.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../include/c++/7.2.0"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../include/c++/7.2.0/x86_64-w64-mingw32"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../include/c++/7.2.0/backward"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../include"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include-fixed"/>
-					<Add directory="C:/Program Files/Haskell Platform/8.6.5/mingw/bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/../../../../x86_64-w64-mingw32/include"/>
-					<Add directory="C://Program Files//Haskell Platform//8.6.5//mingw//bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include"/>
-					<Add directory="C://Program Files//Haskell Platform//8.6.5//mingw//bin/../lib/gcc/x86_64-w64-mingw32/7.2.0/include-fixed"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 lista3___BST/fast"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
+				<Option working_dir="/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lista3___BST">
+				<Option output="/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/lista3___BST" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 lista3___BST"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="lista3___BST/fast">
+				<Option output="/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/lista3___BST" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 lista3___BST/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/viniciusscala/Desktop/listas-algoritmos/lista3\ -\ BST/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/main.cpp">
+		<Unit filename="/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/main.cpp">
 			<Option target="lista3___BST"/>
 		</Unit>
-		<Unit filename="C:/Users/vsob/Desktop/listas-algoritmos/lista3 - BST/CMakeLists.txt">
+		<Unit filename="/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>

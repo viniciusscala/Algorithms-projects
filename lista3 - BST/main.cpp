@@ -1,4 +1,4 @@
-#include <bits/stdc++.h>
+#include "/usr/local/include/bits/stdc++.h"
 #define endl '\n'
 
 using namespace std;
@@ -10,45 +10,63 @@ using namespace std;
 
 class List{//ach que a lista esta pronta
     int element;
-    List* next;
     int totalElementos;
+    List* next;
 
 public:
-
     List(){
         this->element = 0;
         next = nullptr;
         this->totalElementos = 0;
     }
 
-    void inset(int id){
-        if(this->next = nullptr){
-            this->next->element = id;
-            this->totalElementos = this->totalElementos + 1;
+    List(int id){
+        this->element = id;
+        next = nullptr;
+        this->totalElementos = 0;
+    }
+
+    void inset1(int id, List* head){
+        if(this->next == nullptr){
+            this->next = new List(id);
+            head->totalElementos = head->totalElementos + 1;
         }else{
-            this->next->inset(id);
+            this->next->inset1(id, head);
+        }
+    }
+
+    void inset(int id){
+        inset1(id, this);
+    }
+
+    void remove1(int id, List* head){
+        if(this->next->element==id){
+            this->next=this->next->next;
+            head->totalElementos = head->totalElementos - 1;
+        }else{
+            this->next->remove1(id, head);
         }
     }
 
     void remove(int id){
-        if(this->next->element==id){
-            this->next=this->next->next;
-            this->totalElementos = this->totalElementos - 1;
-        }else{
-            this->next->remove(id);
-        }
+        remove1(id, this);
     }
 
     bool src(int id){
-        if(this->next->element == id){
-            return true;
-        }else if(this->next == nullptr){
+        if(this->next == nullptr){
             return false;
+        }else if(this->next->element == id){
+            return true;
         }else{
-            return src(id);
+            return this->next->src(id);
         }
     }
-};
+
+    int getTotalElementos() {
+        return totalElementos;
+    }
+
+};//fim da classe lista
 
 
 class Node{//aka posto
@@ -57,14 +75,13 @@ public:
     Node* left;//aka subordinado
     Node* right;//aka subordinado
     List* funcionarios;
-    Node* pai;
 
-    Node(Node* pai, int element){
+    Node(int element, int id){
         this->element = element;
         this -> left = nullptr;
         this -> right = nullptr;
         this->funcionarios = new List();
-        this-> pai = pai;
+        this->funcionarios->inset(id);
     }
 
     Node(){
@@ -72,44 +89,118 @@ public:
         this -> left = nullptr;
         this -> right = nullptr;
         this->funcionarios = new List();
-        this-> pai = nullptr;
     }
 
-    void insertNode(Node* pai, int element){
+    bool insertNode(int element, int id, int maxh, Node* root, int ramo){//tenho que ver o ngc da altura aqui////////////////////////////////////////////////////////////
         if(element>this->element){
-            if(this->right==nullptr){
-                this->right= new Node(pai, element);
+            if(this->right==nullptr){//o problema daqui é que inserir nem sempre aumenta a altura
+                int altura = root->altura(nullptr);
+                if(ramo==altura&&(altura+1)>maxh){//aqui sempre aumenta
+                    return false;
+                }else{//aqui n aumenta
+                    this->right= new Node(element, id);
+                    return true;
+                }
             }else{
-                this->right->insertNode(this->right, element);
+                return this->right->insertNode(element, id, maxh, root, ramo +1);
             }
-        }else{
+        }else if(element<this->element){
             if(this->left==nullptr){
-                this->left= new Node(pai, element);
+                int altura = root->altura(nullptr);
+                if(ramo==altura&&(altura+1)>maxh){//aqui sempre aumenta
+                    return false;
+                }else{
+                    this->left= new Node(element, id);
+                    return true;
+                }
             }else{
-                this->left->insertNode(this->left, element);
+                return this->left->insertNode(element, id, maxh, root, ramo +1);
+            }
+        }else{//aqui n aumenta a altura
+            this->funcionarios->inset(id);
+            return true;
+        }
+    }
+
+    Node* menor(){
+        if(this->left==nullptr){
+            return this;
+        }else{
+            return this->left->menor();
+        }
+    }
+
+    void removeNode(Node* root, int element){
+        if((element > this->element)){
+            this->right->removeNode(this->right, element);
+        }else if((element < this->right->element)){
+            this->left->removeNode(this->right, element);
+        }else{
+            if(this->left==nullptr){//se só tiver o da direita (O elemento que eu quero deletar)
+                root = this->right;
+            }else if(this->right==nullptr){//se so tiver o da esquerda
+                root = this->left;
+            }else{//se tiver os dois
+                //o menor da direita
+                Node* aux = this->right->menor();
+                this->removeNode(this, aux->element);
+                root = aux;
             }
         }
     }
 
-    void removeReal(int element){
-        if(this->left==nullptr && this->right == nullptr){//sem filho
-            this = null;
-        }else if(this->left != nullptr){//filho a esquerda
-
-        }else if(this -> right != nullptr){//filho a direita
-
-        }else{//2 filhos
-
+    int altura(Node* casta){
+        if(this==casta){
+            return -1;
+        }else{
+            int a = this->right->altura(casta);
+            int b = this->left->altura(casta);
+            int max;
+            if(a>b){
+                max = a;
+            }else{
+                max = b;
+            }
+            return 1 + max;
         }
     }
 
-    void removeNode(int element){
-        if(element = this->right->element){
-            this->removeReal(element);
-        }else if(element > this->right->element){
-            this->right->removeNode(element);
+    int src(Node* root, int id, int casta, int h){
+        if(casta == this->element){
+            if(this->funcionarios->src(id)){
+                return h;
+            }else{
+                return -1;
+            }
+        }else{//cada evz que entra aqui, a altura soma 1 ////////////////////////////////////////////////////////
+            if(casta>this->element){
+                if(this->right==nullptr){
+                    return -1;
+                }else{
+                    return this->right->src(root, id, casta, h+1);
+                }
+            }else{
+                if(this->left==nullptr){
+                    return -1;
+                }else{
+                    return this->left->src(root, id, casta, h+1);
+                }
+
+            }
+        }
+    }
+
+    Node* src(int casta){
+        if(casta == this->element){
+            return this;
+        }else if(this!=nullptr){
+            if(casta>this->element){
+                return this->right->src(casta);
+            }else{
+                return this->left->src(casta);
+            }
         }else{
-            this->left->removeNode(element);
+            return nullptr;
         }
     }
 
@@ -119,41 +210,69 @@ class Bst{//aka base
 private:
     Node* root;
 
+    bool insert(int element, int id, Node* root, int maxh){
+        if(this->root==nullptr){//nesse caso nunca vai aumentar a altura
+            this->root = new Node(element, id);
+            return true;
+        }else{
+            return this->root->insertNode(element, id, maxh, root, 0);
+        }
+    }
+
+    void remove(int element){
+        this->root->removeNode(this->root, element);
+    }
+
+    int src(int id, int casta){
+        return this->root->src(this->root, id, casta, 0);
+    }
+
+    int altura(){
+        return this->root->altura(nullptr);
+    }
+
 public:
+
+    Node *getRoot() const {
+        return root;
+    }
 
     Bst(){
         this->root = nullptr;
     }
 
-    void insert(int element){
-       if(this->root==nullptr){
-           this->root = new Node(nullptr, element);
-       }else{
-           this->root->insertNode(this->root, element);
-       }
+    bool adm(int id, int casta, int maxh, Node* root){
+        int teste = this->altura();
+        if(teste<=maxh){// nem sempre inserir aumenta o tamanho da arvore/////////////////////////////////////////
+            return this->insert(casta, id, root, maxh);
+        }else{
+            return false;
+        }
     }
 
-    void remove(int element){
-        this->root->removeNode(element);
-    }
-
-};
-
-class ArrayBases{
-    Bst* arrayBase;
-public:
-
-    ArrayBases(int numBases){
-        this->arrayBase = new Bst[numBases];
-    }
-
-    void insert(){
+    bool inf(int id, int casta, int max){
+        int teste = this->altura();
+        if(teste<max){
+            this->insert(casta, id, this->root, max);
+            return true;
+        }else{
+            return false;
+        }
 
     }
 
-    void remove(){
-
+    void ext(int id, int casta){
+        Node* posto= this->root->src(casta);
+        posto->funcionarios->remove(id);
+        if(posto->funcionarios->getTotalElementos()==0){
+            this->remove(posto->element);
+        }
     }
+
+    int sch(int id, int casta){
+        return src(id, casta);
+    }
+
 };
 
 int main(int argc, char *argv[]) {
@@ -168,7 +287,11 @@ int main(int argc, char *argv[]) {
     cin >> hLimite;
     cin >> totalInicialAgentes;
 
-    ArrayBases* array = new ArrayBases(numBases);
+    Bst arrayBase[5];
+
+    //for(int i = 0; i<numBases; i++){
+    //    arrayBase[i] = *new Bst();
+    //}
 
     int casta;
     int id;
@@ -184,9 +307,14 @@ int main(int argc, char *argv[]) {
         cin >> id;
         cin >> base;
 
+        bool teste = false;
+
+        for(int j = 0; j<numBases && !teste; j++){
+            int baseAux = ((base+j) % numBases);
+            teste = arrayBase[baseAux].adm(id, casta, hLimite, arrayBase[baseAux].getRoot());
+        }
 
 
-        //inserir os funcionarios
     }
 
     cin >> comando;
@@ -197,15 +325,31 @@ int main(int argc, char *argv[]) {
             cin >> id;
             cin >> base;
 
+            bool teste = false;
+
+            for(int i = 0; i<numBases && !teste; i++){
+                teste = arrayBase[((base+i) % numBases)].inf(id, casta, hLimite);
+                if(teste){
+                    cout << ((base+i) % numBases) << endl;
+                }
+            }
+            if(!teste){
+                cout << -1 << endl;
+            }
+
         }else if(comando == "EXT"){//remover
             cin >> casta;
             cin >> id;
             cin >> base;
 
+            arrayBase[base].ext(id, casta);
+
         }else if(comando == "SCH"){//procurar
             cin >> casta;
             cin >> id;
             cin >> base;
+
+            cout << arrayBase[base].sch(id, casta) << endl;
 
         }
 
