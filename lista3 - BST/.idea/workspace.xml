@@ -77,7 +77,10 @@
       <updated>1570720831441</updated>
       <workItem from="1570720832636" duration="1929000" />
       <workItem from="1570725688911" duration="4066000" />
-      <workItem from="1570754243323" duration="34612000" />
+      <workItem from="1570754243323" duration="34686000" />
+      <workItem from="1570841762615" duration="5365000" />
+      <workItem from="1570899408056" duration="21000" />
+      <workItem from="1570899497555" duration="8273000" />
     </task>
     <servers />
   </component>
@@ -89,7 +92,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
@@ -100,8 +105,8 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>370</line>
-          <option name="timeStamp" value="29" />
+          <line>367</line>
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

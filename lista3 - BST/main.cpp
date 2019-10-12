@@ -92,7 +92,7 @@ public:
         this->funcionarios = new List();
     }
 
-    bool insertNode(int element, int id, int maxh, Node* root, int ramo){//tenho que ver o ngc da altura aqui////////////////////////////////////////////////////////////
+    bool insertNode(int element, int id, int maxh, Node* root, int ramo){
         if(element>this->element){
             if(this->right==nullptr){//o problema daqui é que inserir nem sempre aumenta a altura
                 int altura = root->altura(nullptr);
@@ -131,21 +131,29 @@ public:
         }
     }
 
-    void removeNode(Node* root, int element){
+    Node* change(Node* root, Node* folha){
+        this->element = folha->element;
+        this->funcionarios = folha ->funcionarios;
+        return this;
+    }
+
+    Node* removeNode(Node* root, int element){// ////////////////////////////////////////////////////////////////////tava editando aqui
         if((element > this->element)){
-            this->right->removeNode(this->right, element);
+            this->right = this->right->removeNode(this->right, element);
+            return this;
         }else if((element < this->element)){
-            this->left->removeNode(this->right, element);
+            this->left = this->left->removeNode(this->right, element);
+            return this;
         }else{
             if(this->left==nullptr){//se só tiver o da direita (O elemento que eu quero deletar)
-                root = this->right;
+                return  this->right;
             }else if(this->right==nullptr){//se so tiver o da esquerda
-                root = this->left;
+                return  this->left;
             }else{//se tiver os dois
-                //o menor da direita
-                Node* aux = this->right->menor();
-                this->removeNode(this, aux->element);
-                root = aux;
+                Node* aux = this->right->menor();//o menor da direita
+                root = change(root, aux);
+                root->right = root->right->removeNode(root->right, aux->element);
+                return  root;
             }
         }
     }
@@ -173,7 +181,7 @@ public:
             }else{
                 return -1;
             }
-        }else{//cada evz que entra aqui, a altura soma 1 ////////////////////////////////////////////////////////
+        }else{//cada evz que entra aqui, a altura soma 1
             if(casta>this->element){
                 if(this->right==nullptr){
                     return -1;
@@ -191,12 +199,12 @@ public:
         }
     }
 
-    Node* src(int casta){
-        if(this!=nullptr){
+    Node* src(Node* root,int casta){
+        if(root!=nullptr){
             if(casta>this->element){
-                return this->right->src(casta);
+                return this->right->src(this->right,casta);
             }else if(casta<this->element){
-                return this->left->src(casta);
+                return this->left->src(this->left,casta);
             }else{
                 return this;
             }
@@ -221,7 +229,7 @@ private:
     }
 
     void remove(int element){
-        this->root->removeNode(this->root, element);
+        this->root = this->root->removeNode(this->root, element);
     }
 
     int src(int id, int casta){
@@ -246,7 +254,7 @@ public:
 
     bool adm(int id, int casta, int maxh, Node* root){
         int teste = this->altura();
-        if(teste<=maxh){// nem sempre inserir aumenta o tamanho da arvore/////////////////////////////////////////
+        if(teste<=maxh){// nem sempre inserir aumenta o tamanho da arvore
             return this->insert(casta, id, root, maxh);
         }else{
             return false;
@@ -255,7 +263,7 @@ public:
 
     bool inf(int id, int casta, int maxh, Node* root){
         int teste = this->altura();
-        if(teste<=maxh){// nem sempre inserir aumenta o tamanho da arvore/////////////////////////////////////////
+        if(teste<=maxh){// nem sempre inserir aumenta o tamanho da arvore
             return this->insert(casta, id, root, maxh);
         }else{
             return false;
@@ -263,13 +271,13 @@ public:
     }
 
     void ext(int id, int casta){
-        Node* posto= this->root->src(casta);
+        Node* posto= this->root->src(this->root, casta);
         if(posto!=nullptr){
-            posto->funcionarios->remove(id);
-            if(posto->funcionarios->getTotalElementos()==0){
-                this->remove(posto->element);
-            }
-        }
+             posto->funcionarios->remove(id);
+             if(posto->funcionarios->getTotalElementos()==0){
+                 this->remove(posto->element);
+             }
+         }
     }
 
     int sch(int id, int casta){
@@ -320,24 +328,27 @@ int main(int argc, char *argv[]) {
 
         bool teste = false;
 
-        //debugger(arrayBase);
-        //cout << endl;
-
         for(int j = 0; j<numBases && !teste; j++){
             int baseAux = ((base+j) % numBases);
             teste = arrayBase[baseAux].adm(id, casta, hLimite, arrayBase[baseAux].getRoot());
         }
 
+        //cout << "id" << id << endl;
+        //debugger(arrayBase);
+        //cout << endl;
 
     }
 
     cin >> comando;
     while(comando!="END"){
 
+        cin >> casta;
+        cin >> id;
+        cin >> base;
+
+        //cout << comando << " " << casta << " " << id << " " << base << " " << endl;
+
         if(comando == "INF"){//inserir
-            cin >> casta;
-            cin >> id;
-            cin >> base;
 
             bool teste = false;
 
@@ -353,16 +364,10 @@ int main(int argc, char *argv[]) {
             }
 
         }else if(comando == "EXT"){//remover
-            cin >> casta;
-            cin >> id;
-            cin >> base;
 
             arrayBase[base].ext(id, casta);
 
         }else if(comando == "SCH"){//procurar
-            cin >> casta;
-            cin >> id;
-            cin >> base;
 
             cout << arrayBase[base].sch(id, casta) << endl;
 
