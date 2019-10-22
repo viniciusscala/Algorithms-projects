@@ -4,9 +4,10 @@
 using namespace std;
 
 
-class sistemaOperacional{
-    vector<vector<int>> processos;//arestas que saem de processos
-    vector<int> recursos;//arestas que saem de recursos (Só pode ter 1 por recurso)
+class SistemaOperacional{
+    vector<vector<int>> processos(1);//arestas que saem de processos
+    vector<int>recursos(1);//arestas que saem de recursos (Só pode ter 1 por recurso)
+
 
     void req(int p, int r){
 
@@ -25,7 +26,14 @@ int main(int argc, char *argv[]) {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
+    SistemaOperacional oi;
 
 
+    vector<int> teste(1, -1);
+    teste.push_back(6);
+    teste.push_back(5);
+    teste.push_back(4);
+    cout<< teste[2];
+    cout.flush();
     return 0;
 }

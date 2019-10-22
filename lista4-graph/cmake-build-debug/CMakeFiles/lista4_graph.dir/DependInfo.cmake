@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "E:/Users/vsob/Desktop/listas-algoritmos/lista4-graph/main.cpp" "E:/Users/vsob/Desktop/listas-algoritmos/lista4-graph/cmake-build-debug/CMakeFiles/lista4_graph.dir/main.cpp.obj"
+  "/home/CIN/vsob/Desktop/listas-algoritmos/lista4-graph/main.cpp" "/home/CIN/vsob/Desktop/listas-algoritmos/lista4-graph/cmake-build-debug/CMakeFiles/lista4_graph.dir/main.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
