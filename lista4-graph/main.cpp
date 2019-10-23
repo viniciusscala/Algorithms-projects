@@ -74,28 +74,41 @@ public:
 };
 
 class SistemaOperacional{
+public:
     vector<Vertice> processos;//array de processos// um elemento desse array tem o nome do proceso e ua fila de recursos que ele está usando
     vector<Vertice> recursos;// array de recursos// um elemento desse assay tem o nome do recurso e a fila de processos que querem usar ele (ps: o primeiro é o que esta usando)
     map<string, int> map;
+
+    SistemaOperacional(){
+        this->processos;
+        this->recursos;
+        this->map;
+    }
 
     void req(string p, string r){//processo solicita recurso
         if(map.count(p)&&map.count(r)){//se o processo e o recurso já existem
             Vertice* recurso = &this->recursos[this->map[r]];
             Vertice* processo = &this->processos[this->map[p]];
+
             if(recurso->line->isFree()){//recurso esta livre // o processo consegue o recurso
                 recurso->line->in(processo);
                 processo->line->in(recurso);
+                cout << "AVAIL" << endl;
             }else{//se o recurso esta sendo usado // o processo entra na fila do recurso
                 recurso->line->in(processo);
+                cout << "WAIT W" << endl;
             }
+
         }else if(map.count(p)){//se o processo ja existe
             Vertice* recurso = new Vertice(r);
             Vertice* processo = &this->processos[this->map[p]];
-            recursos.push_back(*recurso);
+            recursos.push_back(*recurso);/////////////////////////////////////////////////////////// talvez aqui de problema com o apontador e etc
             map[r] = recursos.size()-1;
 
             recurso->line->in(processo);
             processo->line->in(recurso);
+
+            cout << "AVAIL" << endl;
 
         }else if(map.count(r)){//se o recurso ja existe
             Vertice* recurso = &this->recursos[this->map[r]];
@@ -106,8 +119,10 @@ class SistemaOperacional{
             if(recurso->line->isFree()){//recurso esta livre // o processo consegue o recurso
                 recurso->line->in(processo);
                 processo->line->in(recurso);
+                cout << "AVAIL" << endl;
             }else{//se o recurso esta sendo usado // o processo entra na fila do recurso
                 recurso->line->in(processo);
+                cout << "WAIT W" << endl;
             }
 
         }else{//se nenhum dos 2 existem
@@ -121,14 +136,16 @@ class SistemaOperacional{
             recurso->line->in(processo);
             processo->line->in(recurso);
 
+            cout << "AVAIL" << endl;
+
         }
     }
 
-    void fre(){
+    void fre(string p, string r){
 
     }
 
-    void dlk(){
+    void dlk(string p, string r){
 
     }
 
@@ -140,7 +157,25 @@ int main(int argc, char *argv[]) {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    SistemaOperacional oi;
+    SistemaOperacional* so = new SistemaOperacional();//ta dando um erro aqui
+
+   string func, p, r;
+
+    cin >> func;
+
+    while(func!="END"){
+        cin >> p;
+        cin >> r;
+
+        if(func == "REQ"){
+            so->req(p, r);
+        }else if(func == "FRE"){
+            so->fre(p, r);
+        }else if(func == "DLK"){
+            so->dlk(p, r);
+        }
+        cin >> func;
+    }
 
     return 0;
 }
