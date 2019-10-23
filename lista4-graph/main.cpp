@@ -4,8 +4,11 @@
 using namespace std;
 
 class Vertice{
+public:
+
 
     class Line{
+    public:
         Vertice* val;
         Line* next;
 
@@ -41,14 +44,32 @@ class Vertice{
             }
         }
 
+        bool exist(Vertice* node){
+            if(this->next == nullptr){
+                return false;
+            }else if(this->next->val->name == node->name){
+                return true;
+            }else{
+                return this->next->exist(node);
+            }
+        }
+
+        bool isFree(){
+            if(this->next==nullptr){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
     };
 
     string name;
-    Line* ptr;
+    Line* line;
 
-    Vertice(string name, Line* ptr){
+    Vertice(string name){
         this->name = name;
-        this->ptr = ptr;
+        this->line = new Line();
     }
 };
 
@@ -58,13 +79,47 @@ class SistemaOperacional{
     map<string, int> map;
 
     void req(string p, string r){//processo solicita recurso
-        if(map.count(p)&&map.count(r)){//se o processoe o recurso já existem
-            processos[p]
+        if(map.count(p)&&map.count(r)){//se o processo e o recurso já existem
+            Vertice* recurso = &this->recursos[this->map[r]];
+            Vertice* processo = &this->processos[this->map[p]];
+            if(recurso->line->isFree()){//recurso esta livre // o processo consegue o recurso
+                recurso->line->in(processo);
+                processo->line->in(recurso);
+            }else{//se o recurso esta sendo usado // o processo entra na fila do recurso
+                recurso->line->in(processo);
+            }
         }else if(map.count(p)){//se o processo ja existe
+            Vertice* recurso = new Vertice(r);
+            Vertice* processo = &this->processos[this->map[p]];
+            recursos.push_back(*recurso);
+            map[r] = recursos.size()-1;
+
+            recurso->line->in(processo);
+            processo->line->in(recurso);
 
         }else if(map.count(r)){//se o recurso ja existe
+            Vertice* recurso = &this->recursos[this->map[r]];
+            Vertice* processo = new Vertice(p);
+            processos.push_back(*processo);
+            map[p] = processos.size()-1;
+
+            if(recurso->line->isFree()){//recurso esta livre // o processo consegue o recurso
+                recurso->line->in(processo);
+                processo->line->in(recurso);
+            }else{//se o recurso esta sendo usado // o processo entra na fila do recurso
+                recurso->line->in(processo);
+            }
 
         }else{//se nenhum dos 2 existem
+            Vertice* recurso = new Vertice(r);
+            Vertice* processo = new Vertice(p);
+            recursos.push_back(*recurso);
+            map[r] = recursos.size()-1;
+            processos.push_back(*processo);
+            map[p] = processos.size()-1;
+
+            recurso->line->in(processo);
+            processo->line->in(recurso);
 
         }
     }
