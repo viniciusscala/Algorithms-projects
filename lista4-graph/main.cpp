@@ -81,10 +81,62 @@ public:
 
     string name;
     Line* line;
+    Line lineAux;
+    string collor;
 
     Vertice(string name){
         this->name = name;
         this->line = new Line();
+        this->collor = "white";
+    }
+
+
+    bool deadLockAux(stack<Vertice*> pilha, stack<Vertice*> limpar, Vertice* parametro, bool teste, map<Vertice*, bool> exist){
+//        if(this->collor=="white"){
+//
+//        }else if(this->collor=="gray"){
+//
+//        }else if(this->collor=="black"){
+//
+//        }
+
+
+        if(exist.count(this)&&exist[this]){//se eu achei um babado que ta na pilha
+            return true;
+        }else if(!this->lineAux.isFree()){//se ainda tem apontador
+            Vertice* aux = this->lineAux.out(&this->lineAux.size);//pega o primeiro da fila
+            pilha.push(aux);//bota o primeiro na fila
+            exist[aux] = true;
+            return pilha.top()->deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
+        }else if(this->lineAux.isFree()){//se a fila ta vazia//n aponta mais p ngm
+            if(teste&&this->name==parametro->name){
+                return false;
+            }else if(this->name==parametro->name){
+                return false;
+            }else{
+                Vertice* aux1 = pilha.top();
+                pilha.pop();
+                exist[aux1] = false;
+                return pilha.top()->deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
+            }
+        }
+
+
+        //e se ele verifica um que ja n aponta p ngm?
+
+
+        //se eu voltei p o primeiro e n achei ele// retorna false
+
+    }
+
+
+    bool deadlock(){
+        stack<Vertice*> pilha;
+        stack<Vertice*> limpar;
+        this->lineAux = *this->line;
+        map<Vertice*, bool> exist;
+        this->deadLockAux(pilha, limpar, this, false, exist);
+
     }
 };
 
@@ -175,7 +227,11 @@ public:
     }
 
     void dlk(string p){
-
+        if(processos[m[p]].deadlock()){//se tiver deadlock
+            this->fre(p);//tem que mudar alguma coisinha
+        }else{
+            cout<< "NONE" <<endl;
+        }
     }
 
 };
