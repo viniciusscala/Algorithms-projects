@@ -38,13 +38,17 @@ public:
         Vertice* out(int* tam){//tir do comeco
             Vertice* aux = this->next->val;
             this->next = this->next->next;
-            return aux;
             *tam = *tam -1;
+            return aux;
         }
 
         void takeOff(Vertice* node, int* tam){
             if(this->next != nullptr && this->next->val->name == node->name){
-                this->next = this->next->next;
+                if(this->next->next!= nullptr){
+                    this->next = this->next->next;
+                }else{
+                    this->next = nullptr;
+                }
                 *tam = *tam -1;
             }else{
                 this->next->takeOff(node, tam);
@@ -67,6 +71,10 @@ public:
             }else{
                 return false;
             }
+        }
+
+        Vertice* getFirst(){
+            return this->next->val;
         }
 
     };
@@ -153,11 +161,16 @@ public:
             int tamanho = processos[m[p]].line->size;
             int cont = 0;
             while(processos[m[p]].line->size!=-1){
-                Vertice* aux = processos[m[p]].line->out(&processos[m[p]].line->size);
-                aux->line->takeOff(&processos[m[p]], &aux->line->size);
+                Vertice* recurso = processos[m[p]].line->out(&processos[m[p]].line->size);//se aqui só tira os que ele ja tem, o recurso sempre vai estar em uso
+                //tenho que ver se o processo já estava com o recurso ou nao
+                Vertice* processo = recurso->line->out(&recurso->line->size);
+                if(!recurso->line->isFree()){
+                    processo = recurso->line->getFirst();
+                    processo->line->in(recurso, &processo->line->size);
+                }
                 cont++;
             }
-            cout << "TERM" << cont << endl;
+            cout << "TERM " << cont << endl;
         }
     }
 
