@@ -17,20 +17,19 @@ public:
         Line(){
             this->val = nullptr;
             this->next = nullptr;
-            this->size = 0;
+            this->size = -1;
         }
 
         Line(Vertice* node){
             this->val= node;
             this->next = nullptr;
-            this->size = 0;
+            this->size = -1;
         }
 
         void in(Vertice* node, int* tam){//vou botar no final
             if(this->next==nullptr){
                 this->next = new Line(node);
-                cout<< *tam;
-                *tam++;
+                *tam = *tam +1;
             }else{
                 this->next->in(node, tam);
             }
@@ -40,13 +39,13 @@ public:
             Vertice* aux = this->next->val;
             this->next = this->next->next;
             return aux;
-            *tam--;
+            *tam = *tam -1;
         }
 
         void takeOff(Vertice* node, int* tam){
             if(this->next != nullptr && this->next->val->name == node->name){
                 this->next = this->next->next;
-                *tam--;
+                *tam = *tam -1;
             }else{
                 this->next->takeOff(node, tam);
             }
@@ -149,11 +148,20 @@ public:
         }
     }
 
-    void fre(string p, string r){
-
+    void fre(string p){
+        if(m.count(p)){//se p existe
+            int tamanho = processos[m[p]].line->size;
+            int cont = 0;
+            while(processos[m[p]].line->size!=-1){
+                Vertice* aux = processos[m[p]].line->out(&processos[m[p]].line->size);
+                aux->line->takeOff(&processos[m[p]], &aux->line->size);
+                cont++;
+            }
+            cout << "TERM" << cont << endl;
+        }
     }
 
-    void dlk(string p, string r){
+    void dlk(string p){
 
     }
 
@@ -174,16 +182,19 @@ int main(int argc, char *argv[]) {
     cin >> func;
 
     while(func!="END"){
-        cin >> p;
-        cin >> r;
 
         if(func == "REQ"){
+            cin >> p;
+            cin >> r;
             so->req(p, r);
         }else if(func == "FRE"){
-            so->fre(p, r);
+            cin >> p;
+            so->fre(p);
         }else if(func == "DLK"){
-            so->dlk(p, r);
+            cin >> p;
+            so->dlk(p);
         }
+        cout.flush();
         cin >> func;
     }
 

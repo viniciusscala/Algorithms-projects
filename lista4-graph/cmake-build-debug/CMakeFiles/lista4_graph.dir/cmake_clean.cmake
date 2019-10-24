@@ -1,9 +1,7 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/lista4_graph.dir/main.cpp.obj"
+  "CMakeFiles/lista4_graph.dir/main.cpp.o"
   "lista4_graph.pdb"
-  "lista4_graph.exe"
-  "lista4_graph.exe.manifest"
-  "liblista4_graph.dll.a"
+  "lista4_graph"
 )
 
 # Per-language clean rules from dependency scanning.
