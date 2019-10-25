@@ -1,5 +1,5 @@
-#include "/usr/local/include/bits/stdc++.h"
-//#include <bits/stdc++.h>
+//#include "/usr/local/include/bits/stdc++.h"
+#include <bits/stdc++.h>
 #include <string>
 #define endl '\n'
 
@@ -84,7 +84,7 @@ public:
 
         void clear1(){
             if(this->next!=nullptr){
-                this->next->next = nullptr;
+                this->next->next = nullptr;//quando ele cria uma copia, ele so cria a copia da cabeca, como o resto é apontador, ele usa o apontador do aux e do normal
             }
         }
 
@@ -114,7 +114,7 @@ public:
                 exist[aux] = true;
                 Vertice proxR = *pilha.top();
                 proxR.lineAux = *proxR.line;
-                proxR.lineAux.clear1();//deixa so o 1
+                    proxR.lineAux.clear1();//deixa so o 1
                 if(!proxR.lineAux.isFree()&&exist.count(proxR.lineAux.getFirst())&&exist[proxR.lineAux.getFirst()]){
                     return true;
                 }else{
