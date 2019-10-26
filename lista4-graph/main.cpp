@@ -1,5 +1,5 @@
-//#include "/usr/local/include/bits/stdc++.h"
-#include <bits/stdc++.h>
+#include "/usr/local/include/bits/stdc++.h"
+//#include <bits/stdc++.h>
 #include <string>
 #define endl '\n'
 
@@ -75,7 +75,12 @@ public:
         }
 
         Vertice* getFirst(){
-            return this->next->val;
+            if(this->next==nullptr){
+                return nullptr;
+            }else{
+                return this->next->val;
+            }
+
         }
 
         void clear(){
@@ -88,13 +93,30 @@ public:
             }
         }
 
+        Line clone(Line* aux){
+
+            //a fila sempre tem o primeiro mas ele n importa
+
+            if(this->next==nullptr){//clona o atual e para
+
+            }else{//clona o atual e da o passo recursivo
+                aux->val = this->val;
+                aux->next = this->next;//isso n vai dar certo, ele só vai copar o apontador
+
+                //eu tenho que sair dando new
+
+                this->next->clone(aux->next);
+            }
+
+        }//ele vai retornar a cabeça p a nova lista
+
     };
 
     string name;
     Line* line;
     Line* want;
-    Line wantAux;
-    Line lineAux;
+    Line* wantAux;
+    Line* lineAux;
     string collor;
 
     Vertice(string name){
@@ -105,71 +127,180 @@ public:
     }
 
 
-    bool deadLockAux(stack<Vertice*> pilha, stack<Vertice*> limpar, Vertice* parametro, bool teste, map<Vertice*, bool> exist){
+//    bool deadLockAux(stack<Vertice*> pilha, stack<Vertice*> limpar, Vertice* parametro, bool teste, map<Vertice*, string> exist){
+//
+//        //processo -> usa o want
+//        //eu posso criar um vector de apontador de fila//ou talvez uma pilha
+//
+//        Line* apontador;
+//
+//        if(this->name[0]=='P'){//se for processo
+//            apontador = this->want;
+//            if(!apontador->isFree()){//se ainda tem apontador
+//                Vertice* aux = apontador->getFirst();//pega o primeiro da fila//tenho que parr de usar esse out
+//                apontador = apontador->next;
+//                pilha.push(aux);//bota o primeiro na fila
+//                exist[aux] = "grey";
+//                Vertice proxR = *pilha.top();
+//               proxR.lineAux = *proxR.line;//tenho que mudar isso aqui
+//                proxR.lineAux.clear1();//deixa so o 1
+//                if(!proxR.line->isFree()&&exist.count(proxR.line->getFirst())&&exist[proxR.line->getFirst()]=="grey"){
+//                    return true;
+//                }else{
+//                    return proxR.deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
+//                }
+//            }else{//se n aponta p mais ngm
+//                Vertice* aux1 = pilha.top();
+//                pilha.pop();
+//                exist[aux1] = "black";
+//                if(pilha.size()==0){//se a pilha acabou, retorna falso
+//                    return false;
+//                }else{
+//                    return pilha.top()->deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
+//                }
+//            }
+//
+//            //recurso -> usa o line.getfirst
+//        }else{//se for recurso
+//            apontador = this->line;
+//            if(!apontador->isFree()){//se ainda tem apontador
+//                Vertice* aux = this->lineAux.out(&this->lineAux.size);//pega o primeiro da fila
+//                pilha.push(aux);//bota o primeiro na pilha
+//                exist[aux] = true;
+//                Vertice* proxP = pilha.top();
+//                proxP->wantAux = *proxP->want;
+//                if(!proxP->wantAux.isFree()&&exist.count(proxP->wantAux.getFirst())&&exist[proxP->wantAux.getFirst()]){
+//                    return true;
+//                }else{
+//                    return proxP->deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
+//                }
+//            }else{//se n aponta p mais ngm
+//                Vertice* aux1 = pilha.top();
+//                pilha.pop();
+//                exist[aux1] = false;
+//                if(pilha.size()==0){
+//                    return false;
+//                }else{
+//                    return pilha.top()->deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
+//                }
+//            }
+//        }
+//
+//
+//
+//    }
 
+    //(exist.count(proxR)&&exist[proxR]=="grey")
+
+    //o prox é r6
+
+    bool deadlockAux1(stack<Line*> pilha, Vertice* parametro, map<Vertice*, string> exist){//eu to adicionando o primeiro recurso sem verificar
         if(this->name[0]=='P'){//se for processo
-            if(!this->wantAux.isFree()){//se ainda tem apontador
-                Vertice* aux = this->wantAux.out(&this->wantAux.size);//pega o primeiro da fila
-                pilha.push(aux);//bota o primeiro na fila
-                exist[aux] = true;
-                Vertice proxR = *pilha.top();
-                proxR.lineAux = *proxR.line;
-                    proxR.lineAux.clear1();//deixa so o 1
-                if(!proxR.lineAux.isFree()&&exist.count(proxR.lineAux.getFirst())&&exist[proxR.lineAux.getFirst()]){
+            if(!pilha.top()->isFree()){//se ainda tem coisa apontando
+                Vertice* proxR = pilha.top()->getFirst();//pega o primeiro da fila//tenho que parr de usar esse out
+                if(exist[proxR]=="grey"){
                     return true;
                 }else{
-                    return proxR.deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
+                    pilha.push(proxR->line);//bota o primeiro na fila
+                    exist[proxR] = "grey";
+                    return proxR->deadlockAux1(pilha,parametro,exist);//faz recursivamente com o ultimo da pilha
                 }
-            }else{//se n aponta p mais ngm
-                Vertice* aux1 = pilha.top();
+//                pilha.push(proxR->line);//bota o primeiro na fila
+//                exist[proxR] = "grey";
+//                bool test1 = !(exist.count(proxR)&&exist[proxR]=="grey");
+//                bool test2 = exist.count(proxR);
+//                bool test3 = exist[proxR]=="grey";
+//                if(test2&&test3){//is free n funciona p recurso
+//                    return true;
+//                }else{
+//                    return proxR->deadlockAux1(pilha,parametro,exist);//faz recursivamente com o ultimo da pilha
+//                }
+            }else{
                 pilha.pop();
-                exist[aux1] = false;
-                if(pilha.size()==0){
+                exist[this] = "black";
+                if(pilha.size()==0){//se a pilha acabou, retorna falso
                     return false;
-                }else{
-                    return pilha.top()->deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
+                }else{//aqui tem que fazer a funcao recursova p que o ngm nunca retorne nullptr
+                    while(pilha.size()>0&&pilha.top()->next==nullptr){
+                        pilha.pop();
+                    }
+                    if(pilha.size()==0){//se a pilha acabou, retorna falso
+                        return false;
+                    }else{
+                        Line* auxx = pilha.top();
+                        pilha.pop();
+                        auxx = auxx->next;
+                        pilha.push(auxx);
+                        return pilha.top()->val->deadlockAux1(pilha, parametro, exist);//faz recursivamente com o ultimo da pilha
+                    }
                 }
             }
-        }else{//se for recurso
-            if(!this->lineAux.isFree()){//se ainda tem apontador
-                Vertice* aux = this->lineAux.out(&this->lineAux.size);//pega o primeiro da fila
-                pilha.push(aux);//bota o primeiro na pilha
-                exist[aux] = true;
-                Vertice* proxP = pilha.top();
-                proxP->wantAux = *proxP->want;
-                if(!proxP->wantAux.isFree()&&exist.count(proxP->wantAux.getFirst())&&exist[proxP->wantAux.getFirst()]){
-                    return true;
-                }else{
-                    return proxP->deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
-                }
-            }else{//se n aponta p mais ngm
-                Vertice* aux1 = pilha.top();
+        }else{//se for recurso//nesse caso, ou ele aponta p um ou ele n aponta p ngm
+
+            if(exist[this->line->getFirst()]=="grey"){//se a fila já acabou
                 pilha.pop();
-                exist[aux1] = false;
-                if(pilha.size()==0){
+                exist[this] = "black";
+//                Vertice* aux1 = pilha.top()->val;
+//                pilha.pop();
+//                exist[aux1] = "black";
+                if(pilha.size()==0){//se a pilha acabou, retorna falso
                     return false;
                 }else{
-                    return pilha.top()->deadLockAux(pilha, limpar, parametro, true, exist);//faz recursivamente com o ultimo da pilha
+                    while(pilha.size()>0&&pilha.top()->next==nullptr){
+                        pilha.pop();
+                    }
+                    if(pilha.size()==0){//se a pilha acabou, retorna falso
+                        return false;
+                    }else{
+                        Line* auxx = pilha.top();
+                        pilha.pop();
+                        auxx = auxx->next;
+                        pilha.push(auxx);
+                        return pilha.top()->val->deadlockAux1(pilha, parametro, exist);//faz recursivamente com o ultimo da pilha
+                    }
                 }
+            }else{//se tem prox
+                Vertice* proxP = pilha.top()->getFirst();//pega o primeiro da fila//tenho que parr de usar esse out
+                if(exist[proxP]=="grey"){
+                    return true;
+                }else{
+                    pilha.push(proxP->want);//bota o primeiro na fila
+                    exist[proxP] = "grey";
+                    return proxP->deadlockAux1(pilha,parametro,exist);//faz recursivamente com o ultimo da pilha
+                }
+//                exist[aux] = "grey";
+//                pilha.push(aux->want);//bota o primeiro na fila
+//                Vertice* proxP = pilha.top()->getFirst();
+//                if(!proxP->want->isFree()&&exist.count(proxP->want->getFirst())&&exist[proxP->want->getFirst()]=="grey"){
+//                    return true;
+//                }else{
+//                    return proxP->deadlockAux1(pilha,parametro,exist);//faz recursivamente com o ultimo da pilha
+//                }
             }
         }
-
-
-
     }
-
 
     bool deadlock(){
 
-        stack<Vertice*> pilha;
-        stack<Vertice*> limpar;
-        map<Vertice*, bool> exist;
-        pilha.push(this);
-        exist[this] = true;
+        //tenho que lembrar
+        //processor usa want
+        //recurso usa o primeiro do line
 
-        this->wantAux = *this->want;
+        stack<Line*> pilha;
+        map<Vertice*, string> exist;
+        exist.clear();
+        pilha.push(this->want);
+        exist[this] = "grey";
 
-        return this->deadLockAux(pilha, limpar, this, false, exist);
+        //e se essa pilha for de apontador de fila?//nesse caso, ele acabaria quando o da base chegasse em null, pq eu iria dando next nele
+
+        //braco = nem entrou na pilha ainda // se eu achar um branco, ele entr na pilha
+        //cinza = está na pilha // se eu tentar botar um cinza, achei um cilco
+        //preto = já saiu da pilha // se achar um preto, pula p o prox
+
+        //vou criar um metodo p clonar a fila
+
+        return this->deadlockAux1(pilha, this, exist);
 
     }
 };
