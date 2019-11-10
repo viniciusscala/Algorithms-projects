@@ -1,5 +1,5 @@
-#include "/usr/local/include/bits/stdc++.h"
-//#include <bits/stdc++.h>
+//#include "/usr/local/include/bits/stdc++.h"
+#include <bits/stdc++.h>
 #include <string>
 #define endl '\n'
 
@@ -168,3 +168,4 @@ int main(int argc, char *argv[]) {
 
     return 0;
 }
+
