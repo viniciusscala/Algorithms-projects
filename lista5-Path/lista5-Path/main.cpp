@@ -41,7 +41,7 @@ public:
     }
     
     void insert(int x, int y){
-        int nameAux = int(this->fase.size()-1);
+        int nameAux = (int)this->fase.size();
         Vertice* aux = new Vertice(x,y,nameAux);
         fase.push_back(aux);
     }
@@ -93,8 +93,10 @@ int main(int argc, char *argv[]) {
                 cin>>end;
                 game.edge(j, end);
             }
-        }
+        }//acabou a parte de pegar a entrada
+        
+        
+        
     }
-//no final de cada fase eu uso um vector .clear
     return 0;
 }
