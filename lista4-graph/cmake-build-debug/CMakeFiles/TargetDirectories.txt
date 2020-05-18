@@ -1,3 +1,0 @@
-/home/CIN/vsob/Desktop/listas-algoritmos/lista4-graph/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/CIN/vsob/Desktop/listas-algoritmos/lista4-graph/cmake-build-debug/CMakeFiles/lista4_graph.dir
-/home/CIN/vsob/Desktop/listas-algoritmos/lista4-graph/cmake-build-debug/CMakeFiles/edit_cache.dir

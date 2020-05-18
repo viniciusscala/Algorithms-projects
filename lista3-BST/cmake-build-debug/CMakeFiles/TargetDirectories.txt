@@ -1,3 +1,0 @@
-/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/viniciusscala/Desktop/listas-algoritmos/lista3 - BST/cmake-build-debug/CMakeFiles/lista3___BST.dir

@@ -1,1 +1,0 @@
-/usr/bin/c++  -g   CMakeFiles/lista4_graph.dir/main.cpp.o  -o lista4_graph 
